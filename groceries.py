@@ -3,27 +3,32 @@ from collections import defaultdict
 from apyori import apriori
 import time
 
-dataset = pd.read_csv('.\\datasets\\groceries\\groceries1.csv',sep=',')
+dataset = pd.read_csv('.\\datasets\\groceries\\groceries2.csv',sep=',')
+unique_count = dataset.iloc[:, 1:].nunique().sum()
 
-transactions = []
-# convert the data into a transactional format
-for i in range(0, 4999):
-    transactions.append([str(dataset.values[i,u]) for u in range(1, 33)])
+# print(dataset.iloc[:, 1:])
 
-st = time.time()
-# run the apriori algorithm
+print("Number of unique items throughout all the columns:", unique_count)
 
-rules = apriori(transactions, min_support=0.0022, min_confidence=0.20, min_lift=3, min_length = 2)
-results = list(rules)
+# transactions = []
+# # convert the data into a transactional format
+# for i in range(0, 2999):
+#     transactions.append([str(dataset.values[i,u]) for u in range(1, 33)])
 
-et = time.time()
+# st = time.time()
+# # run the apriori algorithm
 
-time_taken = et - st
+# rules = apriori(transactions, min_support=0.0022, min_confidence=0.20, min_lift=3, min_length = 2)
+# results = list(rules)
 
-print("the time taken to run this algorithm is ", time_taken)
+# et = time.time()
 
-results_list = []
-for i in range(0, len(results)):
-    results_list.append('RULE:\t' + str(results[i][0]) + '\nSUPPORT:\t' + str(results[i][1]))
+# time_taken = et - st
 
-# print(results_list)
+# print("the time taken to run this algorithm is ", time_taken)
+
+# results_list = []
+# for i in range(0, len(results)):
+#     results_list.append('RULE:\t' + str(results[i][0]) + '\nSUPPORT:\t' + str(results[i][1]))
+
+# # print(results_list)
